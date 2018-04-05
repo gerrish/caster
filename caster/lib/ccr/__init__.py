@@ -20,12 +20,15 @@ command_sets = {
     "vhdl.vhdl": ("VHDL", ),
 }
 
-
-for module_name,class_name_tup in command_sets.iteritems():
+for module_name, class_name_tup in command_sets.iteritems():
     for class_name in class_name_tup:
         try:
-            module = __import__(module_name, globals(), locals(),[class_name])    #attempts to import the class 
-            globals()[class_name]= module    #make the name available globally 
+            _grammar = module_name.split(".")[1]
+            _module = __import__(
+                module_name, globals(), locals(),
+                [_grammar])  #attempts to import the class  #attempts to import the class
+            _class = getattr(_module, class_name)
+            globals()[class_name] = _class  #make the name available globally
 
         except Exception as e:
             print("Ignoring ccr rule '{}'. Failed to load with: ".format(class_name))

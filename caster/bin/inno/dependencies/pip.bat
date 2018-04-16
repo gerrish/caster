@@ -7,6 +7,7 @@ pip install wxpython
 pip install dragonfly
 pip install pillow
 pip install psutil
+pip install pyaudio
 
 echo ------------------------------------------
 echo Caster Dependencies Installation Complete

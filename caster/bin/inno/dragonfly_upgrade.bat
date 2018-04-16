@@ -6,11 +6,14 @@ cd temp_dragonfly
 
 
 
-git clone https://github.com/t4ngo/dragonfly.git
+
+git clone --recursive https://github.com/Danesprite/dragonfly.git
+cd dragonfly
+git submodule foreach python setup.py install
 
 
 
-cd dragonfly\dragonfly
+cd dragonfly/dragonfly
 xcopy /Y/E/Q * C:\Python27\Lib\site-packages\dragonfly 
 
 cd C:\

@@ -57,12 +57,20 @@ class MergeRule(MappingRule):
         if self._mcontext is None: self._mcontext = mcontext
         self._mwith = self.__class__.mwith
         if self._mwith is None: self._mwith = mwith
-
+        self.title = name if name else self.__class__.__name__
         if mapping is not None:
             mapping["display available commands"] = Function(
                 lambda: self._display_available_commands())
+        self.registered_action_label_mapping()
 
         MappingRule.__init__(self, name, mapping, extras, defaults, exported)
+
+    def registered_action_label_mapping(self):
+        ''' Assign the title to the registered actions, unless they have declared another name.
+            Title is used to avoid conflict with internal name property of MappingRule'''
+        for action in self.mapping.itervalues():
+            if action.__class__.__name__ == "RegisteredAction" and action.grammar_title == "default":
+                action.grammar_title = self.title
 
     def __eq__(self, other):
         if not isinstance(other, MergeRule):

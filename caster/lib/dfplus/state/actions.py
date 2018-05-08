@@ -9,6 +9,8 @@ _NEXUS = control.nexus()
 class RegisteredAction(ActionBase):
     def __init__(self,
                  base,
+                 grammar_title="default",
+                 API=False,
                  rspec="default",
                  rdescript="unnamed command (RA)",
                  rundo=None,
@@ -16,6 +18,7 @@ class RegisteredAction(ActionBase):
         ActionBase.__init__(self)
         self._nexus = None
         self.base = base
+        self.grammar_title = grammar_title
         self.rspec = rspec
         self.rdescript = rdescript
         self.rundo = rundo
